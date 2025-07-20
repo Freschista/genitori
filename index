@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Plan: Genitori AI Ecosystem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: Calm Harmony Neutrals -->
+    <!-- Application Structure Plan: L'applicazione è strutturata come una dashboard a singola pagina con una barra di navigazione fissa per un accesso rapido alle sezioni chiave: Panoramica, Pilastri del Business, Proiezioni Finanziarie, Roadmap e Strategia. Questa struttura è stata scelta per consentire agli utenti (investitori, partner) di cogliere rapidamente l'essenza del business plan e di approfondire le aree di interesse in modo non lineare. Le interazioni, come le schede per i pilastri del business e i grafici dinamici per i dati finanziari, sono progettate per presentare informazioni complesse in modo chiaro e digeribile, migliorando la comprensione e l'engagement rispetto a un documento statico. -->
+    <!-- Visualization & Content Choices: 
+        - Obiettivo Strategico -> Goal: Informare -> 3 Card (HTML/CSS) -> Justification: Fornisce una visione d'insieme immediata dei flussi di entrate.
+        - Struttura Operativa -> Goal: Organizzare -> Interfaccia a schede (JS) con tabelle -> Interaction: Click su schede -> Justification: Previene una lunga scrollata e permette un'analisi focalizzata su ogni pilastro.
+        - Costi Mensili -> Goal: Mostrare Proporzioni -> Grafico a Ciambella (Chart.js) -> Interaction: Tooltip al passaggio del mouse -> Justification: Visualizza efficacemente la composizione dei costi.
+        - Forecast Guadagni -> Goal: Mostrare Variazioni e Confronti -> Grafico a Barre Sovrapposte e Grafico a Linee (Chart.js) -> Interaction: Tooltip al passaggio del mouse -> Justification: I grafici comunicano la crescita e la composizione dei ricavi in modo molto più efficace di una tabella.
+        - Roadmap 6 Mesi -> Goal: Organizzare, mostrare processo -> Timeline verticale (HTML/CSS) -> Justification: Più coinvolgente e facile da seguire di una tabella.
+        - Considerazioni Strategiche -> Goal: Informare -> Card informative (HTML/CSS) -> Justification: Evidenzia i vantaggi competitivi chiave.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF6;
+            color: #3C3633;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link.active, .nav-link:hover {
+            color: #739072;
+            border-bottom-color: #739072;
+        }
+        .tab-btn.active {
+            background-color: #739072;
+            color: #FDFBF6;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-[#3C3633]">Genitori AI Ecosystem</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#overview" class="nav-link text-gray-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Panoramica</a>
+                        <a href="#pillars" class="nav-link text-gray-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Pilastri del Business</a>
+                        <a href="#financials" class="nav-link text-gray-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Dati Finanziari</a>
+                        <a href="#roadmap" class="nav-link text-gray-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Roadmap</a>
+                        <a href="#strategy" class="nav-link text-gray-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Strategia</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+        <section id="overview" class="mb-16 scroll-mt-16">
+            <h2 class="text-3xl font-bold text-center mb-4">🎯 Obiettivo Strategico</h2>
+            <p class="text-center max-w-3xl mx-auto text-lg text-gray-600 mb-12">
+                Creare un ecosistema di business integrato e scalabile, focalizzato sul mercato della genitorialità, che diversifica le entrate attraverso tre pilastri sinergici e ad alta automazione.
+            </p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h3 class="font-bold text-xl mb-2 text-[#739072]">1. Prodotti Digitali</h3>
+                    <p class="text-gray-600">Punto d'ingresso a basso costo per generare lead qualificati, costruire fiducia e creare un flusso di cassa iniziale attraverso la vendita di guide, planner e mini-corsi.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h3 class="font-bold text-xl mb-2 text-[#739072]">2. App AI-Based (SaaS)</h3>
+                    <p class="text-gray-600">Il cuore dell'ecosistema. Un'applicazione in abbonamento che offre soluzioni pratiche e personalizzate ai genitori, garantendo entrate mensili ricorrenti (MRR).</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h3 class="font-bold text-xl mb-2 text-[#739072]">3. Servizi B2B</h3>
+                    <p class="text-gray-600">Un'offerta ad alto valore per brand e professionisti del settore genitoriale, che capitalizza le competenze interne per creare flussi di cassa stabili e con margini elevati.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pillars" class="mb-16 scroll-mt-16">
+            <h2 class="text-3xl font-bold text-center mb-4">⚙️ Pilastri del Business</h2>
+            <p class="text-center max-w-3xl mx-auto text-lg text-gray-600 mb-12">
+                Ogni pilastro è progettato per funzionare in sinergia con gli altri, creando un funnel di valore che accompagna l'utente da cliente occasionale a sostenitore a lungo termine. Clicca sulle schede per esplorare i dettagli di ogni area.
+            </p>
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-4 flex justify-center border-b border-gray-200">
+                    <button class="tab-btn py-2 px-4 font-semibold text-gray-600 transition-colors duration-300 active" data-tab="1">Prodotti Digitali</button>
+                    <button class="tab-btn py-2 px-4 font-semibold text-gray-600 transition-colors duration-300" data-tab="2">App AI (SaaS)</button>
+                    <button class="tab-btn py-2 px-4 font-semibold text-gray-600 transition-colors duration-300" data-tab="3">Servizi B2B</button>
+                </div>
+                <div id="tab-content">
+                    <div class="tab-panel bg-white p-6 rounded-xl shadow-md border border-gray-100" data-panel="1">
+                        <table class="w-full text-left">
+                            <tbody>
+                                <tr class="border-b"><td class="py-2 font-semibold">Tipo</td><td class="py-2">PDF planner, mini-guide, corsi 3–7 giorni via email</td></tr>
+                                <tr class="border-b"><td class="py-2 font-semibold">Prezzo</td><td class="py-2">9€, 27€, 49€, bundle 97€</td></tr>
+                                <tr class="border-b"><td class="py-2 font-semibold">Tool</td><td class="py-2">Canva, Gumroad, ConvertKit, Notion</td></tr>
+                                <tr class="border-b"><td class="py-2 font-semibold">Marketing</td><td class="py-2">Meta Ads (target mamme/papà), CPC stimato: 0.30–0.60€</td></tr>
+                                <tr><td class="py-2 font-semibold">Obiettivo</td><td class="py-2 text-green-700 font-bold">12–20K€ lordi/mese</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-panel bg-white p-6 rounded-xl shadow-md border border-gray-100 hidden" data-panel="2">
+                        <table class="w-full text-left">
+                            <tbody>
+                                <tr class="border-b"><td class="py-2 font-semibold">Funzionalità</td><td class="py-2">Routine dinamiche, assistente AI, co-genitorialità, planner</td></tr>
+                                <tr class="border-b"><td class="py-2 font-semibold">Tecnologia</td><td class="py-2">MVP no-code (Glide, Softr + Make + GPT API)</td></tr>
+                                <tr class="border-b"><td class="py-2 font-semibold">Prezzo</td><td class="py-2">9€/mese (Base), 19€/mese (PRO), 99€ (Lifetime)</td></tr>
+                                <tr class="border-b"><td class="py-2 font-semibold">Acquisizione</td><td class="py-2">Funnel da prodotti digitali + waitlist</td></tr>
+                                <tr><td class="py-2 font-semibold">Obiettivo</td><td class="py-2 text-green-700 font-bold">~9.500€/mese (MRR) + 5-10K€/mese (Lifetime)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-panel bg-white p-6 rounded-xl shadow-md border border-gray-100 hidden" data-panel="3">
+                        <table class="w-full text-left">
+                            <tbody>
+                                <tr class="border-b"><td class="py-2 font-semibold">Target</td><td class="py-2">Coach maternità/paternità, brand baby, ostetriche</td></tr>
+                                <tr class="border-b"><td class="py-2 font-semibold">Offerta</td><td class="py-2">Pacchetti mensili con contenuti, strategia e automazioni</td></tr>
+                                <tr class="border-b"><td class="py-2 font-semibold">Prezzo Medio</td><td class="py-2">750–1200€/mese per cliente</td></tr>
+                                <tr class="border-b"><td class="py-2 font-semibold">Margine Netto</td><td class="py-2">70–80% (grazie a AI + automazione)</td></tr>
+                                <tr><td class="py-2 font-semibold">Obiettivo</td><td class="py-2 text-green-700 font-bold">8–10K€/mese (fissi)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="financials" class="mb-16 scroll-mt-16">
+            <h2 class="text-3xl font-bold text-center mb-4">💰 Proiezioni Finanziarie</h2>
+             <p class="text-center max-w-3xl mx-auto text-lg text-gray-600 mb-12">
+                Analisi dei costi e previsione dei guadagni su 12 mesi. I grafici interattivi mostrano la crescita prevista e la composizione delle entrate, offrendo una visione chiara della scalabilità del business.
+            </p>
+            <div class="grid lg:grid-cols-5 gap-8">
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h3 class="font-semibold text-xl mb-4 text-center">Ripartizione Costi Mensili Iniziali</h3>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="costsChart"></canvas>
+                    </div>
+                </div>
+                <div class="lg:col-span-3 bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h3 class="font-semibold text-xl mb-4 text-center">Previsione Guadagni Lordi Mensili (12 Mesi)</h3>
+                    <div class="chart-container">
+                        <canvas id="forecastChart"></canvas>
+                    </div>
+                </div>
+            </div>
+             <div class="mt-8 bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                <h3 class="font-semibold text-xl mb-4 text-center">Crescita Stimata: Totale Lordo vs Utile Netto</h3>
+                <div class="chart-container">
+                    <canvas id="profitChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="mb-16 scroll-mt-16">
+            <h2 class="text-3xl font-bold text-center mb-4">🗺️ Roadmap a 6 Mesi</h2>
+            <p class="text-center max-w-3xl mx-auto text-lg text-gray-600 mb-12">
+                Un piano d'azione chiaro e strutturato per passare dall'idea alla piena operatività. La timeline evidenzia le fasi chiave, dalla creazione del brand al lancio dei prodotti e allo scaling.
+            </p>
+            <div class="relative max-w-2xl mx-auto">
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-200"></div>
+                <div class="relative mb-8">
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-white p-4 rounded-lg shadow-md border border-gray-100">
+                                <p class="font-bold text-[#739072]">Settimane 1-2</p>
+                                <p class="text-sm">Setup brand, avatar Sofia/Marco, Canva, Ads account.</p>
+                            </div>
+                        </div>
+                        <div class="w-10 h-10 bg-[#739072] rounded-full flex items-center justify-center text-white font-bold z-10">1</div>
+                    </div>
+                </div>
+                <div class="relative mb-8">
+                     <div class="flex items-center flex-row-reverse">
+                        <div class="w-1/2 pl-8 text-left">
+                            <div class="bg-white p-4 rounded-lg shadow-md border border-gray-100">
+                                <p class="font-bold text-[#739072]">Settimane 3-4</p>
+                                <p class="text-sm">Crea 2 prodotti digitali + 1 funnel tripwire.</p>
+                            </div>
+                        </div>
+                        <div class="w-10 h-10 bg-[#739072] rounded-full flex items-center justify-center text-white font-bold z-10">2</div>
+                    </div>
+                </div>
+                <div class="relative mb-8">
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-white p-4 rounded-lg shadow-md border border-gray-100">
+                                <p class="font-bold text-[#739072]">Settimane 5-8</p>
+                                <p class="text-sm">Avvia ads, crea waitlist app e sviluppa MVP SaaS base.</p>
+                            </div>
+                        </div>
+                        <div class="w-10 h-10 bg-[#739072] rounded-full flex items-center justify-center text-white font-bold z-10">3</div>
+                    </div>
+                </div>
+                <div class="relative mb-8">
+                     <div class="flex items-center flex-row-reverse">
+                        <div class="w-1/2 pl-8 text-left">
+                            <div class="bg-white p-4 rounded-lg shadow-md border border-gray-100">
+                                <p class="font-bold text-[#739072]">Settimane 9-12</p>
+                                <p class="text-sm">Lancia lifetime offer, costruisci pagina servizi e portfolio.</p>
+                            </div>
+                        </div>
+                        <div class="w-10 h-10 bg-[#739072] rounded-full flex items-center justify-center text-white font-bold z-10">4</div>
+                    </div>
+                </div>
+                 <div class="relative mb-8">
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-white p-4 rounded-lg shadow-md border border-gray-100">
+                                <p class="font-bold text-[#739072]">Settimane 13-24</p>
+                                <p class="text-sm">Scala tutto (prodotti, SaaS, B2B) con ads, referral, upsell.</p>
+                            </div>
+                        </div>
+                        <div class="w-10 h-10 bg-[#739072] rounded-full flex items-center justify-center text-white font-bold z-10">5</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="scroll-mt-16">
+            <h2 class="text-3xl font-bold text-center mb-4">🧠 Considerazioni Strategiche</h2>
+            <p class="text-center max-w-3xl mx-auto text-lg text-gray-600 mb-12">
+                I vantaggi competitivi e le leve operative che rendono questo modello di business robusto, profittevole e difficile da replicare.
+            </p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 text-center">
+                     <p class="text-4xl mb-4">👨‍👩‍👧‍👦</p>
+                    <h3 class="font-bold text-lg mb-2 text-[#739072]">Focus sui Papà</h3>
+                    <p class="text-gray-600 text-sm">Un vantaggio competitivo unico in un mercato prevalentemente orientato alle madri, che apre a un segmento di pubblico non ancora saturo.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 text-center">
+                    <p class="text-4xl mb-4">📈</p>
+                    <h3 class="font-bold text-lg mb-2 text-[#739072]">Margini Altissimi</h3>
+                    <p class="text-gray-600 text-sm">Il modello si basa su competenze dirette e proprietà intellettuale, minimizzando i costi variabili e massimizzando la profittabilità su ogni vendita.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 text-center">
+                     <p class="text-4xl mb-4">🤖</p>
+                    <h3 class="font-bold text-lg mb-2 text-[#739072]">Leva di Automazione AI</h3>
+                    <p class="text-gray-600 text-sm">L'uso intensivo dell'IA permette di operare con l'efficienza di un team, riducendo i costi operativi e aumentando la capacità di scalare rapidamente.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-white mt-16">
+        <div class="container mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+            &copy; 2025 Genitori AI Ecosystem - Business Plan Interattivo
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const financialData = {
+        costs: {
+            labels: ['ADS', 'AI & Media', 'Hosting & Tech', 'CRM & Funnel', 'Design & Tools'],
+            data: [750, 130, 85, 40, 25],
+        },
+        forecast: {
+            labels: ['Mese 1', 'Mese 3', 'Mese 6', 'Mese 12'],
+            digitalProducts: [1000, 5000, 8000, 12000],
+            saas: [0, 1500, 5000, 10000],
+            b2b: [1000, 6000, 8000, 10000],
+        },
+        profit: {
+            labels: ['Mese 1', 'Mese 3', 'Mese 6', 'Mese 12'],
+            gross: [2000, 12500, 21000, 32000],
+            net: [800, 9000, 16000, 25000],
+        }
+    };
+    
+    const palette = {
+        primary: 'rgba(115, 144, 114, 0.8)',
+        secondary: 'rgba(224, 167, 94, 0.8)',
+        tertiary: 'rgba(192, 192, 192, 0.8)',
+        primaryBorder: 'rgb(115, 144, 114)',
+        secondaryBorder: 'rgb(224, 167, 94)',
+        tertiaryBorder: 'rgb(192, 192, 192)',
+        netProfit: 'rgba(60, 54, 51, 0.8)',
+        netProfitBorder: 'rgb(60, 54, 51)',
+    };
+    
+    Chart.defaults.font.family = 'Inter';
+    Chart.defaults.color = '#3C3633';
+
+    function createCostsChart() {
+        const ctx = document.getElementById('costsChart')?.getContext('2d');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: financialData.costs.labels,
+                datasets: [{
+                    label: 'Costi Mensili Stimati (€)',
+                    data: financialData.costs.data,
+                    backgroundColor: [palette.primary, palette.secondary, palette.tertiary, 'rgba(148, 175, 185, 0.8)', 'rgba(239, 227, 201, 0.8)'],
+                    borderColor: '#FDFBF6',
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(context.parsed);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function createForecastChart() {
+        const ctx = document.getElementById('forecastChart')?.getContext('2d');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: financialData.forecast.labels,
+                datasets: [
+                    {
+                        label: 'Prodotti Digitali',
+                        data: financialData.forecast.digitalProducts,
+                        backgroundColor: palette.primary,
+                    },
+                    {
+                        label: 'SaaS',
+                        data: financialData.forecast.saas,
+                        backgroundColor: palette.secondary,
+                    },
+                    {
+                        label: 'Servizi B2B',
+                        data: financialData.forecast.b2b,
+                        backgroundColor: palette.tertiary,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                        ticks: {
+                            callback: value => new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(value)
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    function createProfitChart() {
+        const ctx = document.getElementById('profitChart')?.getContext('2d');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: financialData.profit.labels,
+                datasets: [
+                    {
+                        label: 'Totale Lordo',
+                        data: financialData.profit.gross,
+                        borderColor: palette.primaryBorder,
+                        backgroundColor: palette.primary,
+                        fill: true,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Utile Netto Stimato',
+                        data: financialData.profit.net,
+                        borderColor: palette.netProfitBorder,
+                        backgroundColor: palette.netProfit,
+                        fill: true,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                     y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: value => new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(value)
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+
+    createCostsChart();
+    createForecastChart();
+    createProfitChart();
+
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            const tabId = button.getAttribute('data-tab');
+            tabPanels.forEach(panel => {
+                if (panel.getAttribute('data-panel') === tabId) {
+                    panel.classList.remove('hidden');
+                } else {
+                    panel.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('main section');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href').substring(1) === entry.target.id);
+                });
+            }
+        });
+    }, { rootMargin: '-50% 0px -50% 0px' });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
+</script>
+</body>
+</html>
